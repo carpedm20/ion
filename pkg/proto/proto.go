@@ -8,6 +8,7 @@ import (
 
 const (
 	// client to ion
+	ClientList        = "list"
 	ClientJoin        = "join"
 	ClientLeave       = "leave"
 	ClientPublish     = "publish"

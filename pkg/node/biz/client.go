@@ -15,6 +15,22 @@ var (
 	midError = util.NewNpError(codeMIDErr, codeStr(codeMIDErr))
 )
 
+func list() (interface{}, *nprotoo.Error) {
+	log.Infof("biz.list")
+
+	var rooms = signal.GetRooms()
+
+	room_ids := make([]string, len(rooms))
+	for i := 0; i < len(rooms); i++ {
+		room_ids[i] = string(rooms[i].ID())
+	}
+	var result = map[string]interface{}{
+		"rooms": room_ids,
+	}
+
+	return result, nil
+}
+
 // join room
 func join(peer *signal.Peer, msg proto.JoinMsg) (interface{}, *nprotoo.Error) {
 	log.Infof("biz.join peer.ID()=%s msg=%v", peer.ID(), msg)

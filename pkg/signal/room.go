@@ -78,6 +78,21 @@ func GetRoomsByPeer(id string) []*Room {
 	return r
 }
 
+// one peer in many room
+func GetRooms() []*Room {
+	var r []*Room
+	roomLock.RLock()
+	defer roomLock.RUnlock()
+	for _, room := range rooms {
+		//log.Debugf("signal.GetRoomsByPeer rid=%v id=%v", rid, id)
+		if room == nil {
+			continue
+		}
+		r = append(r, room)
+	}
+	return r
+}
+
 func DelPeer(rid proto.RID, id string) {
 	log.Infof("DelPeer rid=%s id=%s", rid, id)
 	room := getRoom(rid)

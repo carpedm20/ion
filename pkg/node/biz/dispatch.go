@@ -29,6 +29,8 @@ func Entry(method string, peer *signal.Peer, msg json.RawMessage, accept signal.
 
 	//TODO DRY this up
 	switch method {
+	case proto.ClientList:
+		result, topErr = list()
 	case proto.ClientJoin:
 		var msgData proto.JoinMsg
 		if topErr = ParseProtoo(msg, &msgData); topErr == nil {
